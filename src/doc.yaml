@@ -1,0 +1,146 @@
+openapi: 3.0.3
+info:
+  title: Library API
+  description: Fetch and create your users
+  version: 1.0.0
+tags:
+  - name: auth
+    description: Authentication operations
+  - name: user
+    description: User CRUD operations
+components:
+  schemas:
+    AuthenticationCredentials:
+      required:
+        - username
+        - password
+      type: object
+      properties:
+        username:
+          type: string
+          example: user@ynov.com
+        password:
+          type: string
+          example: pwd
+    AuthenticationToken:
+      required:
+        - token
+      type: object
+      properties:
+        token:
+          type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlhdCI6MTY2ODQ0MTEzMiwiZXhwIjoxNjY4NDQ0NzMyfQ.g-UvWR4tJgbZq7-i2Wm2aiOsVxfzJ05lGKhQ9kKhCvE
+    AppException:
+      required:
+        - code
+        - message
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+    
+    UserRead:
+      required:
+        - id
+        - username
+        - password
+        - role
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 2
+        username:
+          type: string
+          example: user@ynov.com
+        password:
+          type: string
+          example: pwd
+        role:
+          type: string
+          example: contributor
+
+    UserUpdate:
+      type: object
+      properties:
+        username:
+          type: string
+          example: user@ynov.com
+        password:
+          type: string
+          example: pwd
+        role:
+          type: string
+          example: contributor
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+paths:
+  /auth/login:
+    post:
+      tags:
+        - auth
+      description: Login
+      summary: Login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthenticationCredentials'
+      responses:
+        201:
+          description: Return authentication token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationToken'
+        401:
+          description: Return Credentials exception
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppException'
+  /users/{id}:
+    patch:
+      tags:
+        - user
+      description: Update user
+      summary: Update user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserUpdate'
+      parameters:
+        - name: id
+          in: path
+          description: User id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        200:
+          description: Return updated user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserRead'
+        401:
+          description: Return Authentication token exception
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppException'
+        404:
+          description: Return Book not found exception
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppException'
+      security:
+        - bearerAuth: []
+    
