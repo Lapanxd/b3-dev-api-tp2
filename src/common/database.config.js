@@ -22,10 +22,10 @@ const getSequelize = () => {
 export const sequelize = getSequelize();
 
 sequelize.authenticate()
-  .then(() => console.log('DB connection OK'))
-  .catch(error => console.error('DB connection KO', error))
-  .then(() => sequelize.sync())
-  .catch(error => console.error('DB sync KO', error));
+  // .then(() => console.log('DB connection OK'))
+  // .catch(error => console.error('DB connection KO', error))
+  // .then(() => sequelize.sync())
+  // .catch(error => console.error('DB sync KO', error));
 
 /*
 

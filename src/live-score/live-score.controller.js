@@ -1,4 +1,4 @@
-import { liveScoreService } from './liveScore.service.js';
+import { liveScoreService } from './live-score.service.js';
 
 class LiveScoreController {
     findPage = (request, response, next) => {

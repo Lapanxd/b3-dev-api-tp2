@@ -1,6 +1,6 @@
 import { liveScoreRepositoryAsync } from 'ynov-toulouse-b3-info-live-score-api';
-import { liveScoreRepository } from './liveScore.repository.js';
-import { mapFromDto, mapToDto, mapFromPartialDto } from './liveScore.mapper.js';
+import { liveScoreRepository } from './live-score.repository.js';
+import { mapFromDto, mapToDto, mapFromPartialDto } from './live-score.mapper.js';
 
 class LiveScoreService {
   findByPage = (pageIndex, pageSize) => {

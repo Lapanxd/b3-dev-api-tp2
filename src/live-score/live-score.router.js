@@ -1,5 +1,5 @@
 import express from 'express';
-import { liveScoreController } from './liveScore.controller.js';
+import { liveScoreController } from './live-score.controller.js';
 import { checkIdMiddleware } from '../common/check-id.middleware.js';
 import { checkPaginationMiddleware } from '../common/check-pagination.middleware.js';
 import { checkAuthorizationToken, checkRoleToken } from '../auth/auth.middleware.js';

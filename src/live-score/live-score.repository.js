@@ -1,4 +1,4 @@
-import { LiveScoreModel } from "./liveScore.model.js";
+import { LiveScoreModel } from "./live-score.model.js";
 
 class LiveScoreRepository {
     findAll = () => LiveScoreModel.findAll();

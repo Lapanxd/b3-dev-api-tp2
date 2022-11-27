@@ -40,10 +40,11 @@ export const checkRoleToken = role => (request, response, next) => {
   if(typeof role === 'string'){
     checkToken(token)
       .then(user => {
+        console.log(user)
         if (user.role !== role) {
           next(new RoleNotAllowedException());
           return;
-        }
+        } 
         next();
       });
   } else if (typeof role === 'object'){
